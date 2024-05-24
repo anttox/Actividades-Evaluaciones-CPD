@@ -1,5 +1,0 @@
-Las funciones lambda no se pueden serializar utilizando el módulo pickle, 
-que es el mecanismo predeterminado utilizado por ProcessPoolExecutor 
-para enviar datos entre procesos. Para resolver este problema, 
-puedes definir las funciones emiter y counter como funciones normales 
-en lugar de lambdas.
