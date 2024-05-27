@@ -1,3 +1,5 @@
+# Ejercicio1: Modifica una de las implementaciones de MapReduce presentadas para incluir un manejo de excepciones robusto que permita la aplicación continuar incluso si una de las tareas de 
+# mapeo o reducción falla. Además, implementa un sistema de logging que registre eventos como el inicio y fin de cada tarea, errores, y el progreso general de las operaciones de mapeo y reducción.
 # logging = monitoreo, depuración y mantenimiento de aplicaciones (errores)
 import logging
 from collections import defaultdict
