@@ -1,8 +1,0 @@
-¿Qué es un Random Forest?
-Un Random Forest está compuesto por una gran cantidad de árboles de decisión individuales que trabajan como un equipo. Cada árbol en el bosque emite un voto 
-y el modelo final toma la decisión basada en la mayoría de los votos (en el caso de la clasificación) o en el promedio de las predicciones de los árboles 
-individuales (en el caso de la regresión).
-
-¿Qué son los Estimadores en el Contexto de Random Forest?
-En el contexto de Random Forest, los estimadores son los componentes individuales que forman el modelo completo. Cada estimador es un árbol de decisión, 
-y el término "estimadores" generalmente se refiere al número de árboles de decisión que se crean y se utilizan en el bosque.
