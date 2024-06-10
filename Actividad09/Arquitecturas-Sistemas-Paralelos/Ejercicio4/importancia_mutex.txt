@@ -1,0 +1,6 @@
+En una arquitectura de memoria compartida, como UMA o NUMA, la sincronización entre hilos es crucial para evitar condiciones de carrera. 
+Usamos un mutex para asegurar que solo un hilo pueda acceder a la variable counter a la vez.
+Un mutex es un mecanismo de sincronización que se utiliza para evitar que múltiples hilos accedan simultáneamente a un recurso compartido.
+El mutex se destruye con pthread_mutex_destroy(&lock); para liberar los recursos que el sistema operativo ha asignado para el mutex. 
+Una vez que todos los hilos han terminado su ejecución y ya no se necesita el mutex, es una buena práctica liberar estos recursos para evitar 
+fugas de memoria y otros problemas relacionados con la administración de recursos del sistema.
