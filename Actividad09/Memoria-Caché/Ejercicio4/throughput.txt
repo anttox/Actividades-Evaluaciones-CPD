@@ -1,0 +1,16 @@
+Throughput: Concepto y Relevanci
+El throughput es una medida del rendimiento de un sistema, que se refiere a la cantidad de trabajo que el sistema puede realizar en un período de tiempo 
+determinado. En el contexto de la computación, el throughput puede tener diferentes significados según el área de aplicación, pero generalmente se refiere 
+a la cantidad de datos procesados o la cantidad de operaciones completadas en una unidad de tiempo.
+Definiciones y Contextos de Throughput:
+Sistemas de Redes:
+En redes de computadoras, el throughput se refiere a la cantidad de datos que pueden ser transmitidos a través de una red en un tiempo determinado. 
+Se mide típicamente en bits por segundo (bps), megabits por segundo (Mbps), o gigabits por segundo (Gbps).
+
+Sistemas de Almacenamiento:
+En sistemas de almacenamiento, el throughput puede referirse a la velocidad a la que los datos pueden ser leídos o escritos en un dispositivo 
+de almacenamiento. Se mide en megabytes por segundo (MB/s) o gigabytes por segundo (GB/s).
+
+Sistemas de Procesamiento:
+En sistemas de procesamiento, especialmente en entornos paralelos y distribuidos, el throughput se refiere al número de operaciones o tareas que pueden 
+ser completadas en un tiempo determinado. Se mide en operaciones por segundo, tareas por segundo, o transacciones por segundo.
