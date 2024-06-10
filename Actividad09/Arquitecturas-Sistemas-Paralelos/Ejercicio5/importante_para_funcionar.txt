@@ -1,0 +1,8 @@
+Usar ctrl + shit + P
+y selecciona o busca C/C++: Edit Configurations (UI)
+Asegurarnos de que includePath incluya la ruta /usr/lib/x86_64-linux-gnu/openmpi/include
+Como lo de abajo:
+${workspaceFolder}/**
+/usr/include
+/usr/local/include
+/usr/lib/x86_64-linux-gnu/openmpi/include
