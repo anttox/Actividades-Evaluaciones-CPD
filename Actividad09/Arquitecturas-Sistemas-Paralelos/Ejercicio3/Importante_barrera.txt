@@ -1,0 +1,7 @@
+La razón por la que se ve el mensaje "Todos los hilos han terminado en todos los nodos." antes de que todos los hilos hayan terminado de ejecutar sus tareas 
+en el codigo mpi_openmp.py es debido a la forma en que los mensajes se manejan en un entorno paralelo con múltiples procesos.
+El mensaje se imprime en el proceso de rango 0, pero debido a que cada proceso ejecuta sus propios hilos de manera independiente, la sincronización 
+y el orden en que los mensajes de salida se imprimen no están garantizados. La salida del print depende de cómo el sistema operativo 
+maneja la planificación de los hilos y la ejecución de los procesos, lo que puede hacer que los mensajes se vean desordenados.
+Para garantizar que todos los procesos hayan terminado antes de que el proceso de rango 0 imprima el mensaje final, podemos usar una barrera de sincronización.
+Podemos usar comm.Barrier() para sincronizar los procesos.
