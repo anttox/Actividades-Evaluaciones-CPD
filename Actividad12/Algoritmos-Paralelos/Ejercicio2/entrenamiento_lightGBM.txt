@@ -1,0 +1,99 @@
+import lightgbm as lgb
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import time
+Importamos las bibliotecas necesarias. lightgbm para el modelo GBM, make_classification para crear el conjunto de datos sintético, train_test_split para 
+dividir el conjunto de datos en entrenamiento y prueba, accuracy_score para evaluar la precisión del modelo, y time para medir el tiempo de entrenamiento.
+
+X, y = make_classification(n_samples=10000, n_features=20, n_classes=2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+make_classification se utiliza para generar un conjunto de datos sintético con 10,000 muestras y 20 características. train_test_split divide el conjunto 
+de datos en entrenamiento (80%) y prueba (20%).
+
+train_data = lgb.Dataset(X_train, label=y_train)
+test_data = lgb.Dataset(X_test, label=y_test)
+Creamos datasets específicos para lightgbm utilizando los datos de entrenamiento y prueba.
+
+params = {
+    'objective': 'binary',
+    'metric': 'binary_logloss',
+    'boosting_type': 'gbdt',
+    'num_leaves': 31,
+    'learning_rate': 0.05,
+    'feature_fraction': 0.9,
+    'n_jobs': -1
+}
+Configuramos el modelo lightgbm con parámetros específicos. objective define el objetivo del modelo (clasificación binaria), metric especifica la métrica 
+a utilizar (pérdida logarítmica binaria), boosting_type define el tipo de boosting (GBDT), num_leaves establece el número máximo de hojas en un árbol, 
+learning_rate define la tasa de aprendizaje, feature_fraction especifica la fracción de características a utilizar en cada iteración, y n_jobs establece 
+el uso de múltiples núcleos para la paralelización.
+
+start_time = time.time()
+bst = lgb.train(params, train_data, valid_sets=[test_data], num_boost_round=100)
+end_time = time.time()
+
+# Calcular el tiempo de entrenamiento
+training_time = end_time - start_time
+print(f"Tiempo de entrenamiento: {training_time:.2f} segundos")
+Entrenamos el modelo lightgbm utilizando los parámetros configurados y los datos de entrenamiento. valid_sets se utiliza para validar el modelo con los 
+datos de prueba en cada iteración, y num_boost_round define el número de iteraciones de boosting. Medimos el tiempo de entrenamiento utilizando time.time().
+
+y_pred = bst.predict(X_test)
+y_pred_binary = [1 if pred > 0.5 else 0 for pred in y_pred]
+
+accuracy = accuracy_score(y_test, y_pred_binary)
+print(f"Precisión del modelo: {accuracy:.4f}")
+Realizamos predicciones utilizando los datos de prueba. predict genera las probabilidades de las clases, y las convertimos en predicciones binarias. 
+Evaluamos la precisión del modelo utilizando accuracy_score.
+
+importance = bst.feature_importance()
+for i, imp in enumerate(importance):
+    print(f"Importancia de la característica {i+1}: {imp}")
+Obtenemos y mostramos la importancia de las características del modelo entrenado. feature_importance devuelve la importancia de cada característica, 
+y las imprimimos para analizarlas.
+
+Salida:
+Para mejorar la precisión del modelo, se pueden ajustar varios parámetros, como num_leaves, learning_rate, num_boost_round, y otros. 
+Aquí se muestra un ejemplo de cómo ajustar algunos de estos parámetros:
+# Ajustar los parámetros del modelo
+params = {
+    'objective': 'binary',
+    'metric': 'binary_logloss',
+    'boosting_type': 'gbdt',
+    'num_leaves': 50,               # Incrementar el número de hojas
+    'learning_rate': 0.01,          # Reducir la tasa de aprendizaje
+    'feature_fraction': 0.8,        # Ajustar la fracción de características
+    'bagging_fraction': 0.8,        # Fracción de datos para el ensacado
+    'bagging_freq': 5,              # Frecuencia de ensacado
+    'n_jobs': -1
+}
+
+# Entrenamiento del modelo con los nuevos parámetros
+start_time = time.time()
+bst = lgb.train(params, train_data, valid_sets=[test_data], num_boost_round=200)  # Aumentar el número de rondas de boosting
+end_time = time.time()
+
+# Calcular el tiempo de entrenamiento
+training_time = end_time - start_time
+print(f"Tiempo de entrenamiento con ajuste de parámetros: {training_time:.2f} segundos")
+
+# Predicción y evaluación del modelo
+y_pred = bst.predict(X_test)
+y_pred_binary = [1 if pred > 0.5 else 0 for pred in y_pred]
+accuracy = accuracy_score(y_test, y_pred_binary)
+print(f"Precisión del modelo con ajuste de parámetros: {accuracy:.4f}")
+
+# Mostrar la importancia de las características
+importance = bst.feature_importance()
+for i, imp in enumerate(importance):
+    print(f"Importancia de la característica {i+1}: {imp}")
+Evaluación del Rendimiento del Modelo
+- Medir el Tiempo de Entrenamiento:
+Mide el tiempo total de entrenamiento utilizando los parámetros ajustados y compara con el tiempo de entrenamiento anterior.
+
+- Calcular la Precisión:
+Evalúa la precisión del modelo ajustado y compárala con la precisión del modelo original.
+
+- Documentar Resultados:
+Anota los tiempos de entrenamiento, la precisión obtenida, y cualquier observación sobre la importancia de las características y el rendimiento del modelo. 
